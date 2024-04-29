@@ -25,7 +25,8 @@ class _ListOfShoesState extends State<ListOfShoes> {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 2,
+                // Image will not resize and go out of render flex pixel
+                // childAspectRatio: 2,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 0,
               ),

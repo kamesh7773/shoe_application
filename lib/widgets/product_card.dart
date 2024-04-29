@@ -40,7 +40,9 @@ class ProductCard extends StatelessWidget {
             Center(
               child: Image.asset(
                 shoeImage,
-                fit: BoxFit.fitHeight,
+                width: MediaQuery.of(context).size.width * 0.25,
+                height: MediaQuery.of(context).size.width * 0.25,
+                // fit: BoxFit.cover,
               ),
             )
           ],
