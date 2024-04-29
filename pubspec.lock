@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auto_resize_image:
+    dependency: "direct main"
+    description:
+      name: auto_resize_image
+      sha256: "2d9e197312cd63ba6e357ae8c87addab10c00470cff2e24d24534174e0e60f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -226,4 +234,4 @@ packages:
     version: "13.0.0"
 sdks:
   dart: ">=3.3.4 <4.0.0"
-  flutter: ">=1.16.0"
+  flutter: ">=1.17.0"

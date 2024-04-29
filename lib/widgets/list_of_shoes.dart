@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shoe_application/pages/product_details.dart';
 import 'package:shoe_application/provider/product_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shoe_application/widgets/product_card.dart';
 
 class ListOfShoes extends StatefulWidget {
   const ListOfShoes({super.key});
@@ -28,7 +27,7 @@ class _ListOfShoesState extends State<ListOfShoes> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 // Image will not resize and go out of render flex pixel
-                childAspectRatio: 2,
+                childAspectRatio: (1 / 1),
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 0,
               ),
@@ -83,82 +82,6 @@ class _ListOfShoesState extends State<ListOfShoes> {
                           Center(
                             child: Image.asset(
                               shoeImage,
-                              height: 175,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          }
-          // -----------------------------------------------------
-          // If Screen Size Greater then 1080 pixel width (Desktop)
-          // -----------------------------------------------------
-          if (constraints.maxWidth > 650) {
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                // Image will not resize and go out of render flex pixel
-                childAspectRatio: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 0,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                // varibles declarations
-                final shoeTitle = products[index]["title"];
-                final shoePrice = products[index]["price"].toString();
-                final shoeImage = products[index]["imageUrl"];
-                final shoeSizeList = products[index]["sizes"];
-
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ProductDetailsPage(
-                            shoeTitle: shoeTitle,
-                            shoeImage: shoeImage,
-                            shoePrice: shoePrice,
-                            shoeSizeList: shoeSizeList,
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  // ------------
-                  // Product Card
-                  // ------------
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                      color: index.isEven
-                          ? const Color.fromRGBO(216, 240, 253, 1)
-                          : const Color.fromARGB(255, 234, 236, 239),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            shoeTitle,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          Text(
-                            "\$ $shoePrice",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          Center(
-                            child: Image.asset(
-                              shoeImage,
-                              height: 175,
                               fit: BoxFit.cover,
                             ),
                           )
@@ -246,3 +169,13 @@ class _ListOfShoesState extends State<ListOfShoes> {
     );
   }
 }
+
+
+
+// Center(
+//                             child: Image.asset(
+//                               shoeImage,
+//                               height: 175,
+//                               fit: BoxFit.cover,
+//                             ),
+//                           )
