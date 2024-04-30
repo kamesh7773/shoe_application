@@ -19,15 +19,15 @@ class _ListOfShoesState extends State<ListOfShoes> {
     return Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          // -----------------------------------------------------
-          // If Screen Size Greater then 650 pixel width (Desktop)
-          // -----------------------------------------------------
-          if (constraints.maxWidth > 650) {
+          // ------------------------------------------------------------
+          // If Screen Size Greater then 768 pixel width (Desktop/Tablet)
+          // ------------------------------------------------------------
+          if (constraints.maxWidth > 768) {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                // Image will not resize and go out of render flex pixel
-                childAspectRatio: (1 / 1),
+                // Sometimes it also can creat bulnder when we try to aching the responsiveness
+                childAspectRatio: 1.8,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 0,
               ),
@@ -66,36 +66,45 @@ class _ListOfShoesState extends State<ListOfShoes> {
                           : const Color.fromARGB(255, 234, 236, 239),
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            shoeTitle,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          Text(
-                            "\$ $shoePrice",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          Center(
-                            child: Image.asset(
-                              shoeImage,
-                              fit: BoxFit.cover,
+                    // By Warping layoutBuilder padding() so we can calcaulate the
+                    // height & width of if Parent Widget (container).
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              shoeTitle,
+                              style: Theme.of(context).textTheme.bodyLarge,
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                            Text(
+                              "\$ $shoePrice",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            Center(
+                              child: Image.asset(
+                                shoeImage,
+                                fit: BoxFit.contain,
+                                // after calculating the real time height & width of container
+                                // we setting the height & width of Image is 50% less height & width
+                                // of the container.
+                                height: constraints.maxHeight * 0.5,
+                                width: constraints.maxWidth * 0.5,
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
                   ),
                 );
               },
             );
           }
-          // -----------------------------------------------------------
-          // If Screen Size Lower then 650 pixel width (Mobile / Tablet)
-          // -----------------------------------------------------------
+          // --------------------------------------------------
+          // If Screen Size Lower then 650 pixel width (Mobile)
+          // --------------------------------------------------
           else {
             return ListView.builder(
               itemCount: products.length,
@@ -169,8 +178,6 @@ class _ListOfShoesState extends State<ListOfShoes> {
     );
   }
 }
-
-
 
 // Center(
 //                             child: Image.asset(

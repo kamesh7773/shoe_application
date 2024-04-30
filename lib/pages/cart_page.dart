@@ -74,6 +74,14 @@ class _CartPageState extends State<CartPage> {
                                     .read<CartProvider>()
                                     .removeFromCart(index);
                                 Navigator.of(context).pop();
+                                // Showing the snakeBar
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    duration: Duration(milliseconds: 500),
+                                    behavior: SnackBarBehavior.floating,
+                                    content: Text("Product remove from cart"),
+                                  ),
+                                );
                               },
                               child: const Text(
                                 "yes",
